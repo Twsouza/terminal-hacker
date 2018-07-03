@@ -6,7 +6,8 @@ public class Hacker : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ShowMainMenu();
+		var greeting = "Hello Taynan";
+		ShowMainMenu(greeting);
 	}
 
 	// Update is called once per frame
@@ -14,9 +15,8 @@ public class Hacker : MonoBehaviour {
 
 	}
 
-	void ShowMainMenu() {
+	void ShowMainMenu(string greeting) {
 		Terminal.ClearScreen();
-		var greeting = "Hello Taynan";
 		Terminal.WriteLine(greeting);
 		Terminal.WriteLine("What would you lik to hack into? \n");
 		Terminal.WriteLine("Press 1 for the local library");
