@@ -6,6 +6,7 @@ public class Hacker : MonoBehaviour {
 	int level;
 	enum Screen { MainMenu, Password, Win};
 	Screen currentScreen;
+	string password;
 
 	// Use this for initialization
 	void Start ()
@@ -28,14 +29,30 @@ public class Hacker : MonoBehaviour {
 	// when user type anything
 	void OnUserInput(string input)
   {
-		if(currentScreen == Screen.MainMenu || input.ToUpper() == "MENU") {
+		if(currentScreen == Screen.MainMenu || input.ToUpper() == "MENU")
+		{
     	RunMainMenu(input);
-		} else {
-			print("You already have chosen one level");
+		} else if(currentScreen == Screen.Password)
+    {
+      CheckPassword(input);
+    } else
+		{
+			ShowMainMenu();
 		}
   }
 
-	// check the user input
+  void CheckPassword(string input)
+  {
+    if(input == password)
+		{
+			Terminal.WriteLine("WELL DONE");
+			currentScreen = Screen.Win;
+		} else {
+			Terminal.WriteLine("WRONG PASSWORD!");
+		}
+  }
+
+  // check the user input
   void RunMainMenu(string input)
   {
     if (input == "1")
@@ -63,8 +80,14 @@ public class Hacker : MonoBehaviour {
 	// set level, change current screen
   void StartGame(int newLevel)
 	{
-		level = newLevel;
 		currentScreen = Screen.Password;
+		level = newLevel;
+		if(level == 1) {
+			password = "book";
+		} else if(level == 2) {
+			password = "jail";
+		}
+
 		Terminal.ClearScreen();
 		Terminal.WriteLine("You chose level " + level);
 		Terminal.WriteLine("Enter the password: ");
