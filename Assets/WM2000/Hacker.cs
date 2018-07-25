@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Hacker : MonoBehaviour {
+	// Game config
+	string[] level1Passwords = { "books", "aisle", "self", "borrow" };
+	string[] level2Passwords = { "jail", "gun", "pen", "handcuff" };
+
+	// Game state
 	int level;
 	enum Screen { MainMenu, Password, Win};
 	Screen currentScreen;
@@ -83,9 +88,9 @@ public class Hacker : MonoBehaviour {
 		currentScreen = Screen.Password;
 		level = newLevel;
 		if(level == 1) {
-			password = "book";
+			password = level1Passwords[0]; // TODO make random later
 		} else if(level == 2) {
-			password = "jail";
+			password = level2Passwords[1]; // TODO make random later
 		}
 
 		Terminal.ClearScreen();
